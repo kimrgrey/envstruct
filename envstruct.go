@@ -19,7 +19,7 @@ func snake(str string) string {
 	return string(res)
 }
 
-func New(x interface{}) {
+func Load(x interface{}) {
 	xval := reflect.Indirect(reflect.ValueOf(x))
 
 	for i := 0; i < xval.NumField(); i++ {

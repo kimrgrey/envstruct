@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func snake(str string) string {
+func envname(str string) string {
 	res := []rune{}
 
 	for index, r := range str {
@@ -21,10 +21,11 @@ func snake(str string) string {
 
 func Load(x interface{}) {
 	xval := reflect.Indirect(reflect.ValueOf(x))
+	xype := xval.Type()
 
-	for i := 0; i < xval.NumField(); i++ {
-		name := xval.Type().Field(i).Name
-		value := os.Getenv(snake(name))
+	for i := 0; i < xype.NumField(); i++ {
+		name := xype.Field(i).Name
+		value := os.Getenv(envname(name))
 		xval.FieldByName(name).SetString(value)
 	}
 }
